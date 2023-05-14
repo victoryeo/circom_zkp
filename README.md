@@ -1,4 +1,4 @@
-This is a project to do zk rollup using circom
+This is a project to do zk rollup using circom. The file rollup.circom contains the zk rollup code. The folder circom contains the circom librabry files.
 
 ### to compile the circuit
 circom rollup.circom --r1cs --wasm --sym --c
