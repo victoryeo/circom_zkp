@@ -149,6 +149,7 @@ template rollup(levels) {
         senderExistence.path_index[i] <== tx_sender_path_idx[i];
         senderExistence.path_elements[i] <== tx_sender_path_element[i];
     }
+    log("sender existence", senderExistence.out);
     senderExistence.out === account_root;
 
     //__2. verify sender's signature
