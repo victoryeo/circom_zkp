@@ -15,13 +15,17 @@ make
 ### perform trusted setup 
 #### using powers of tau (multi party trusted setup)
 ```
-snarkjs powersoftau new bn128 12 pot12_0000.ptau -v
+snarkjs powersoftau new bn128 18 pot12_0000.ptau -v
+```
+Initially, i use `bn128 12`, and I go this error:
+[snarkJS: circuit too big for this power of tau ceremony. 39582*2 > 2**12]
+```
 snarkjs powersoftau contribute pot12_0000.ptau pot12_0001.ptau --name="First contribution" -v
 snarkjs powersoftau prepare phase2 pot12_0001.ptau pot12_final.ptau -v
 snarkjs groth16 setup rollup.r1cs pot12_final.ptau rollup_0000.zkey
 ```
-I go this error:
-[snarkJS: circuit too big for this power of tau ceremony. 39582*2 > 2**12]
+The above steps take 30mins to 1 hour to run.
+
 ```
 snarkjs zkey contribute rollup_0000.zkey rollup_0001.zkey  --name="1st Contributor Name" -v
 ```
