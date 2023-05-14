@@ -10,6 +10,8 @@ template HashLeftRight() {
 
   signal output hash;
 
+  //MiMC is a block cipher and hash function family 
+  //designed specifically for SNARK 
   component hasher = MiMCSponge(2, 220, 1);
   left ==> hasher.ins[0];
   right ==> hasher.ins[1];
@@ -80,6 +82,8 @@ template HashedLeaf() {
     signal input balance;
     signal output out;
 
+    //MiMC is a block cipher and hash function family 
+    //designed specifically for SNARK 
     component txLeaf = MiMCSponge(3, 220, 1);
     txLeaf.ins[0] <== pubkey[0];
     txLeaf.ins[1] <== pubkey[1];
@@ -93,6 +97,8 @@ template MessageHash(n) {
     signal input ins[n];
     signal output out;
 
+    //MiMC is a block cipher and hash function family 
+    //designed specifically for SNARK 
     component msg_hasher = MiMCSponge(n, 220, 1);
     for (var i=0; i<n; i++) {
         msg_hasher.ins[i] <== ins[i];
@@ -125,10 +131,12 @@ template rollup(levels) {
     signal input tx_receiver_path_element[levels];
     signal input tx_receiver_path_idx[levels];
 
+    // new root
     signal output new_root;
     
 
-    //__1. verify sender account existence
+    //__1. verify sender existence
+    // hash sender public key
     component senderLeaf = HashedLeaf();
     senderLeaf.pubkey[0] <== tx_sender_pubkey[0];
     senderLeaf.pubkey[1] <== tx_sender_pubkey[1];
@@ -136,13 +144,15 @@ template rollup(levels) {
 
     component senderExistence = GetMerkleRoot(levels);
     senderExistence.leaf <== senderLeaf.out;
+    //check calc merkle root is same as account root
     for (var i=0; i<levels; i++) {
         senderExistence.path_index[i] <== tx_sender_path_idx[i];
         senderExistence.path_elements[i] <== tx_sender_path_element[i];
     }
     senderExistence.out === account_root;
 
-    //__2. verify signature
+    //__2. verify sender's signature
+    // hash the message
     component msgHasher = MessageHash(5);
     msgHasher.ins[0] <== tx_sender_pubkey[0];
     msgHasher.ins[1] <== tx_sender_pubkey[1];
@@ -150,6 +160,7 @@ template rollup(levels) {
     msgHasher.ins[3] <== tx_receiver_pubkey[1];
     msgHasher.ins[4] <== tx_amount;
 
+    // sign the hash message
     component sigVerifier = EdDSAMiMCSpongeVerifier();
     sigVerifier.enabled <== 1;
     sigVerifier.Ax <== tx_sender_pubkey[0];
@@ -159,7 +170,7 @@ template rollup(levels) {
     sigVerifier.S <== tx_sender_sig_s;
     sigVerifier.M <== msgHasher.out;
 
-    //__3. Check the root of new tree is equivalent
+    //__3. Update sender balance and calc new merkle root
     component newAccLeaf = HashedLeaf();
     newAccLeaf.pubkey[0] <== tx_sender_pubkey[0];
     newAccLeaf.pubkey[1] <== tx_sender_pubkey[1];
@@ -176,7 +187,7 @@ template rollup(levels) {
     //__4. skip checking receiver's existence
     // ...
 
-    //__5. update the root of account tree
+    //__5. Update receiver balance and calc new merkle root
     component newReceiverLeaf = HashedLeaf();
     newReceiverLeaf.pubkey[0] <== tx_receiver_pubkey[0];
     newReceiverLeaf.pubkey[1] <== tx_receiver_pubkey[1];
