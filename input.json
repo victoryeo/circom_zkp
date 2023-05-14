@@ -4,5 +4,14 @@
   "account_pubkey": ["1","1"],
   "account_balance": 1,
   "tx_sender_pubkey": ["1","1"],
-  "tx_sender_balance": "1"
+  "tx_sender_balance": "1",
+  "tx_amount": "1",
+  "tx_sender_sig_r": ["1","1"],
+  "tx_sender_sig_s": "1",
+  "tx_sender_path_element": ["1","1","1","1"],
+  "tx_sender_path_idx": ["1","1","1","1"],
+  "tx_receiver_pubkey": ["1","1"],
+  "tx_receiver_balance": 0,
+  "tx_receiver_path_element": ["1","1","1","1"],
+  "tx_receiver_path_idx": ["1","1","1","1"]
 }

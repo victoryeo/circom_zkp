@@ -161,6 +161,7 @@ template rollup(levels) {
     msgHasher.ins[4] <== tx_amount;
 
     // sign the hash message
+    // use EdDSA MiMC Sponge to verify
     component sigVerifier = EdDSAMiMCSpongeVerifier();
     sigVerifier.enabled <== 1;
     sigVerifier.Ax <== tx_sender_pubkey[0];
