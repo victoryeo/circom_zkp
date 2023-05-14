@@ -1,0 +1,8 @@
+{
+  "new_sender_account_root": "3", 
+  "account_root": "11", 
+  "account_pubkey": ["1","1"],
+  "account_balance": 1,
+  "tx_sender_pubkey": ["1","1"],
+  "tx_sender_balance": "1"
+}
