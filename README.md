@@ -24,10 +24,10 @@ I go this error:
 [snarkJS: circuit too big for this power of tau ceremony. 39582*2 > 2**12]
 ```
 snarkjs zkey contribute rollup_0000.zkey rollup_0001.zkey  --name="1st Contributor Name" -v
-````
+```
 rollup_0000.zkey is old key  
 rollup_0001.zkey is new key
-````
+```
 snarkjs zkey export verificationkey rollup_0001.zkey verification_key.json
 ```
 ### generate a proof
