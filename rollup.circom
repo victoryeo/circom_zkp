@@ -184,8 +184,19 @@ template rollup(levels) {
     }
     newTreeExistence.out === new_sender_account_root;
 
-    //__4. skip checking receiver's existence
-    // ...
+    //__4. verify receiver existence
+    component receiverLeaf = HashedLeaf();
+    receiverLeaf.pubkey[0] <== tx_receiver_pubkey[0];
+    receiverLeaf.pubkey[1] <== tx_receiver_pubkey[1];
+    receiverLeaf.balance <== account_balance;
+    component receiverExistence = GetMerkleRoot(levels);
+    receiverExistence.leaf <== receiverLeaf.out;
+    //check calc merkle root is same as account root
+    for (var i=0; i<levels; i++) {
+        receiverExistence.path_index[i] <== tx_receiver_path_idx[i];
+        receiverExistence.path_elements[i] <== tx_receiver_path_element[i];
+    }
+    receiverExistence.out === account_root;
 
     //__5. Update receiver balance and calc new merkle root
     component newReceiverLeaf = HashedLeaf();
