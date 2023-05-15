@@ -51,6 +51,8 @@ Signals are the variables.
 
 Rank-1 Constraint System (R1CS) is the set of constraints describing the circuit.  
 
+Constraint is to make a program  that constraints give inputs into a certain range.
+
 Non-interactive zero-knowledge (NIZK) proofs are a particular type of zero-knowledge proofs in which the prover can generate the proof without interaction with the verifier.  
 
 ZK_SNARK (Zero Knowledge-Succinct ARguments of Knowledge) is the most preferable NIZK. It is a set of non-interactive zero-knowledge protocols that have succinct proof size and sublinear verification time.  
