@@ -123,12 +123,16 @@ template rollup(levels) {
     signal input tx_amount;
     signal input tx_sender_sig_r[2];
     signal input tx_sender_sig_s;
+    // merkle node
     signal input tx_sender_path_element[levels];
+    // merkle path
     signal input tx_sender_path_idx[levels];
 
     signal input tx_receiver_pubkey[2];
     signal input tx_receiver_balance;
+    // merkle node
     signal input tx_receiver_path_element[levels];
+    // merkle path
     signal input tx_receiver_path_idx[levels];
 
     // new root
@@ -170,6 +174,8 @@ template rollup(levels) {
     sigVerifier.R8x <== tx_sender_sig_r[0];
     sigVerifier.R8y <== tx_sender_sig_r[1];
     sigVerifier.S <== tx_sender_sig_s;
+    log("sigVerifier.S", sigVerifier.S);
+    log("msgHasher.out", msgHasher.out);
     sigVerifier.M <== msgHasher.out;
 
     //__3. Update sender balance and calc new merkle root
@@ -184,6 +190,7 @@ template rollup(levels) {
         newTreeExistence.path_index[i] <== tx_sender_path_idx[i];
         newTreeExistence.path_elements[i] <== tx_sender_path_element[i];
     }
+    log("newTreeExistence.out", newTreeExistence.out);
     newTreeExistence.out === new_sender_account_root;
 
     //__4. verify receiver existence

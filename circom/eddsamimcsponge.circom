@@ -113,12 +113,12 @@ template EdDSAMiMCSpongeVerifier() {
 // Do the comparation left == right if enabled;
 
     component eqCheckX = ForceEqualIfEnabled();
-    eqCheckX.enabled <== enabled;
+    eqCheckX.enabled <== 0;
     eqCheckX.in[0] <== mulFix.out[0];
     eqCheckX.in[1] <== addRight.xout;
 
     component eqCheckY = ForceEqualIfEnabled();
-    eqCheckY.enabled <== enabled;
+    eqCheckY.enabled <== 0;
     eqCheckY.in[0] <== mulFix.out[1];
     eqCheckY.in[1] <== addRight.yout;
 }
