@@ -168,7 +168,7 @@ template rollup(levels) {
     // sign the hash message
     // use EdDSA MiMC Sponge to verify
     component sigVerifier = EdDSAMiMCSpongeVerifier();
-    sigVerifier.enabled <== 0;
+    sigVerifier.enabled <== 0;   // used to be 1
     sigVerifier.Ax <== tx_sender_pubkey[0];
     sigVerifier.Ay <== tx_sender_pubkey[1];
     sigVerifier.R8x <== tx_sender_sig_r[0];
