@@ -3,11 +3,12 @@ This is a project to do zk rollup using circom. The file rollup.circom contains 
 ### compile the circuit
 circom rollup.circom --r1cs --wasm --sym --c
 
-### generate the witness with webassembly
+### generate witness
+#### generate the witness with webassembly
 cd rollup_js
 node generate_witness.js rollup.wasm ../input.json witness.wtns
 
-### generate the witness with cpp
+#### generate the witness with cpp
 cd rollup_cpp
 make
 ./rollup ../input.json witness.wtns
