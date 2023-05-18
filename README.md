@@ -39,7 +39,7 @@ snarkjs zkey export verificationkey rollup_0001.zkey verification_key.json
 ```
 snarkjs groth16 prove rollup_0001.zkey witness.wtns proof.json public.json
 ```
-proof.json contains the proof
+proof.json contains the proof  
 public.json contains the public inputs and outputs
 
 ### verify a proof
