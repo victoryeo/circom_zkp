@@ -36,9 +36,11 @@ rollup_0001.zkey is new key
 snarkjs zkey export verificationkey rollup_0001.zkey verification_key.json
 ```
 ### generate a proof
+```
 snarkjs groth16 prove rollup_0001.zkey witness.wtns proof.json public.json
-#### proof.json contains the proof
-#### public.json contains the public inputs and outputs
+```
+proof.json contains the proof
+public.json contains the public inputs and outputs
 
 ### verify a proof
 snarkjs groth16 verify verification_key.json public.json proof.json
