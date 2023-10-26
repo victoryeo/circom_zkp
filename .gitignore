@@ -2,7 +2,7 @@ rollup.r1cs
 rollup.sym
 rollup_js
 rollup_cpp
-pot12*
+*.ptau
 *.zkey
 verification_key.json
 
