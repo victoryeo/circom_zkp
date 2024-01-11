@@ -5,4 +5,6 @@ rollup_cpp
 *.ptau
 *.zkey
 verification_key.json
+*.r1cs
+bridge_js
 
