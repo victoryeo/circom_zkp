@@ -7,4 +7,4 @@ rollup_cpp
 verification_key.json
 *.r1cs
 bridge_js
-
+node_modules/
